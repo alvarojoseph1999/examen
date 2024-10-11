@@ -1,0 +1,65 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.card {
+    animation: fadeIn 0.5s ease-in-out;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* asdasd */
+
+@media (max-width: 576px) {
+    .card {
+        margin: 10px; /* Asegúrate de que no esté pegado a los bordes */
+    }
+    
+    #resultModal .modal-content {
+        width: 90%; /* Asegúrate de que el modal sea más ancho en pantallas pequeñas */
+    }
+}
+.option-checkbox {
+    margin-bottom: 10px;
+}
+
+#resultModal .modal-content {
+    background-color: #ffffff;
+}
+
+#resultModal .modal-title {
+    color: #000000;
+}
+
+#result-container {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.btn-close {
+    background-color: #f8f9fa;
+}
+
+.btn-primary, .btn-secondary {
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: #004085;
+}
+
+.modal-footer button {
+    margin-right: 10px;
+}
