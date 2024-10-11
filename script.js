@@ -527,35 +527,79 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
+// function loadQuestion() {
+//   questionContainer.textContent = questions[currentQuestion].question;
+//   optionsContainer.innerHTML = "";
+
+//   questions[currentQuestion].options.forEach((option, index) => {
+//     const optionWrapper = document.createElement("div");
+//     optionWrapper.classList.add("form-check", "option-checkbox");
+
+//     const checkbox = document.createElement("input");
+//     checkbox.type = "radio";
+//     checkbox.name = "options";
+//     checkbox.value = index;
+//     checkbox.id = `option${index}`;
+//     checkbox.classList.add("form-check-input");
+//     optionWrapper.appendChild(checkbox);
+
+//     const label = document.createElement("label");
+//     label.setAttribute("for", `option${index}`); // Vinculamos el label con el checkbox
+//     label.textContent = option;
+//     label.classList.add("form-check-label");
+//     optionWrapper.appendChild(label);
+
+//     optionsContainer.appendChild(optionWrapper);
+//   });
+
+//   submitBtn.classList.remove("d-none");
+//   currentQuestionNumber.textContent = currentQuestion + 1;
+// }
 function loadQuestion() {
-  questionContainer.textContent = questions[currentQuestion].question;
-  optionsContainer.innerHTML = "";
+    questionContainer.textContent = questions[currentQuestion].question;
+    optionsContainer.innerHTML = '';
 
-  questions[currentQuestion].options.forEach((option, index) => {
-    const optionWrapper = document.createElement("div");
-    optionWrapper.classList.add("form-check", "option-checkbox");
+    questions[currentQuestion].options.forEach((option, index) => {
+        const optionWrapper = document.createElement('div');
+        optionWrapper.classList.add('form-check', 'option-checkbox');
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "radio";
-    checkbox.name = "options";
-    checkbox.value = index;
-    checkbox.id = `option${index}`;
-    checkbox.classList.add("form-check-input");
-    optionWrapper.appendChild(checkbox);
+        const checkbox = document.createElement('input');
+        checkbox.type = 'radio';
+        checkbox.name = 'options';
+        checkbox.value = index;
+        checkbox.id = `option${index}`;
+        checkbox.classList.add('form-check-input');
+        optionWrapper.appendChild(checkbox);
 
-    const label = document.createElement("label");
-    label.setAttribute("for", `option${index}`); // Vinculamos el label con el checkbox
-    label.textContent = option;
-    label.classList.add("form-check-label");
-    optionWrapper.appendChild(label);
+        const label = document.createElement('label');
+        label.setAttribute('for', `option${index}`);
+        label.textContent = `${String.fromCharCode(97 + index)}. ${option}`; // Agregar a, b, c, d
+        label.classList.add('form-check-label');
+        optionWrapper.appendChild(label);
 
-    optionsContainer.appendChild(optionWrapper);
-  });
+        optionsContainer.appendChild(optionWrapper);
+    });
 
-  submitBtn.classList.remove("d-none");
-  currentQuestionNumber.textContent = currentQuestion + 1;
+    submitBtn.classList.remove('d-none');
+    currentQuestionNumber.textContent = currentQuestion + 1;
 }
+//recien agregados
+function shuffleOptions() {
+    questions.forEach(question => {
+        for (let i = question.options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [question.options[i], question.options[j]] = [question.options[j], question.options[i]];
+        }
+    });
+}
+document.getElementById('start-quiz-btn').addEventListener('click', () => {
+    restartQuiz(); // Iniciar sin mezclar respuestas
+});
 
+document.getElementById('start-shuffled-quiz-btn').addEventListener('click', () => {
+    shuffleOptions(); // Mezclar las opciones de las preguntas
+    restartQuiz(); // Reiniciar el cuestionario con las respuestas mezcladas
+});
 submitBtn.addEventListener("click", selectAnswer);
 
 // Carga la primera pregunta y establece el número total de preguntas
